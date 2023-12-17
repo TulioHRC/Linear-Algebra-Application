@@ -8,7 +8,7 @@ Matrix::Matrix(const Matrix& otherTable) : _rows(otherTable._rows), _columns(oth
     std::vector<std::vector<long long>>* tableCopy = new std::vector<std::vector<long long>>(otherTable._rows);
 
     for(int i = 0; i<otherTable._rows; i++)
-        tableCopy[i].resize(otherTable._columns);
+        (*tableCopy)[i].resize(otherTable._columns);
 
     for(int r = 0; r<this->_rows; r++)
         for(int c = 0; c<this->_columns; c++)
