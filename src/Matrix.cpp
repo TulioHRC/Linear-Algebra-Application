@@ -10,12 +10,12 @@ Matrix::Matrix(const Matrix& otherTable) : _rows(otherTable._rows), _columns(oth
 
 Matrix::Matrix(int dimension) : _rows(dimension), _columns(dimension) {
     std::vector<long long> zeroRows(dimension, 0);
-    std::vector<std::vector<long long>> table(dimension, zeroRows);
+    std::vector<std::vector<long long>>* table = new std::vector<std::vector<long long>>(dimension, zeroRows);
 
     for(int i = 0; i<dimension; i++)
-        table[i][i] = 1;
+        (*table)[i][i] = 1;
     
-    *_table = table;
+    _table = table;
 }
 
 Matrix::~Matrix(){ delete _table; }
