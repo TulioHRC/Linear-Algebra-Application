@@ -14,19 +14,25 @@ Matrix::Matrix(int dimension) : _rows(dimension), _columns(dimension) {
 
     for(int i = 0; i<dimension; i++)
         table[i][i] = 1;
+    
+    *_table = table;
 }
 
 Matrix::~Matrix(){ delete _table; }
 
 Matrix Matrix::transpose(){
-    std::vector<std::vector<long long>> tMatrix(this->_columns);
+    std::vector<std::vector<long long>> tTable(this->_columns);
 
     for(int i = 0; i<this->_columns; i++)
-        tMatrix[i].resize(this->_rows);
+        tTable[i].resize(this->_rows);
 
     for(int r = 0; r<this->_rows; r++)
         for(int c = 0; c<this->_columns; c++)
-            tMatrix[c][r] = (*_table)[r][c];
+            tTable[c][r] = (*_table)[r][c];
+    
+    Matrix tMatrix(this->_columns, this->_rows, tTable);
+
+    return tMatrix;
 } 
 
 void Matrix::showMatrix(){

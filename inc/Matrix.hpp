@@ -8,7 +8,7 @@ class Matrix
 {
     private:
         int _rows, _columns;
-        std::vector<std::vector<long long>>* _table; // It's basically the fundamental structure of a Matrix
+        std::vector<std::vector<long long>>* _table = nullptr; // It's basically the fundamental structure of a Matrix
     public:
         Matrix(int rows, int columns, std::vector<std::vector<long long>> table);
         Matrix(const Matrix&); // Deep Copy
