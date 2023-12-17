@@ -2,7 +2,11 @@
 
 Matrice::Matrice(int rows, int columns, std::vector<std::vector<long long>> table) : _rows(rows), _columns(columns) {
     *_table = table;
-};
+}
+
+Matrice::Matrice(const &Matrice otherTable) : _rows(otherTable->_rows), _columns(otherTable->_columns) {
+    *_table = *otherTable->_table;
+}
 
 Matrice::~Matrice(){ delete _table; }
 
@@ -27,3 +31,28 @@ void Matrice::showMatrice(){
         std::cout << "]" << std::endl;
     }
 }
+
+// Operator Overload
+
+Matrice& Matrice::operator=(const Matrice& otherTable){
+    *this->_table = *otherTable->_table;
+    this->_rows = otherTable->_rows;
+    this->_columns = otherTable->_columns;
+    return *this;
+}
+
+Matrice Matrice::operator+(const Matrice& otherTable){
+    for(int r = 0; r<this->_rows; r++)
+        for(int c = 0; c<this->_columns; c++)
+            *this->_table[r][c] += *otherTable->_table[r][c];
+    return this;
+}
+
+Matrice Matrice::operator-(const Matrice& otherTable){
+    for(int r = 0; r<this->_rows; r++)
+        for(int c = 0; c<this->_columns; c++)
+            *this->_table[r][c] -= *otherTable->_table[r][c];
+    return this;
+}
+
+Matrice Matrice::operator*(const Matrice&)
