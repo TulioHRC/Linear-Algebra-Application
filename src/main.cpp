@@ -5,6 +5,8 @@ int main(){
 
     Matrix identity(3);
 
+    identity = identity + 2;
+
     identity.showMatrix();
 
     return 0;

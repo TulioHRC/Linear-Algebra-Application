@@ -5,7 +5,16 @@ Matrix::Matrix(int rows, int columns, std::vector<std::vector<long long>> table)
 }
 
 Matrix::Matrix(const Matrix& otherTable) : _rows(otherTable._rows), _columns(otherTable._columns) {
-    *_table = *otherTable._table;
+    std::vector<std::vector<long long>>* tableCopy = new std::vector<std::vector<long long>>(otherTable._rows);
+
+    for(int i = 0; i<otherTable._rows; i++)
+        tableCopy[i].resize(otherTable._columns);
+
+    for(int r = 0; r<this->_rows; r++)
+        for(int c = 0; c<this->_columns; c++)
+            (*tableCopy)[r][c] = (*otherTable._table)[r][c];
+
+    _table = tableCopy;
 }
 
 Matrix::Matrix(int dimension) : _rows(dimension), _columns(dimension) {
