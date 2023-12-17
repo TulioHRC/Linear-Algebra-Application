@@ -11,4 +11,19 @@ Matrice Matrice::transpose(){
 
     for(int i = 0; i<this->_columns; i++)
         tMatrice[i].resize(this->_rows);
+
+    for(int r = 0; r<this->_rows; r++)
+        for(int c = 0; c<this->_columns; c++)
+            tMatrice[c][r] = this->_table[r][c];
 } 
+
+void Matrice::showMatrice(){
+    for(int r = 0; r<this->_rows; r++){
+        std::cout << "[ ";
+
+        for(int c = 0; c<this->_columns; c++) 
+            std::cout << this->_table[r][c] << " ";
+        
+        std::cout << "]" << std::endl;
+    }
+}
