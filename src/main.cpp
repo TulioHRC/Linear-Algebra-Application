@@ -1,17 +1,33 @@
 #include "Matrix.hpp"
+#include "Functions.hpp"
+#include <string.h>
 
 int main(){
     std::cout << "Starting...\n" << std::endl;
 
-    Matrix identity(3);
+    std::vector<Matrix*> matrices;
 
-    identity = identity + 2;
+    std::string command;
+    std::cin >> command;
+ 
+    while(command != "q" && command != "quit") {
+        if(command == "c" or command == "create"){ // Create matrix
+            std::vector<std::vector<long long>>* table = getTable();
+            Matrix* matrix = new Matrix((*table).size(), (*table)[0].size(), *table);
+            matrices.push_back(matrix);
 
-    identity.showMatrix();
+            Matrix* mat2 = new Matrix(3);
+            Matrix matR = *mat2 + *matrix;
+            matR.showMatrix();
+        }
 
-    Matrix transposeIdentity(identity.transpose());
+        std::cin >> command;
+    }
 
-    transposeIdentity.showMatrix();
+    std::cout << "\nFinishing the application..." << std::endl;
+
+    for(Matrix* matrix : matrices)
+        delete matrix;
 
     return 0;
 }

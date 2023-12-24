@@ -31,8 +31,7 @@ Matrix::Matrix(int dimension) : _rows(dimension), _columns(dimension) {
 Matrix::~Matrix(){ delete _table; }
 
 Matrix Matrix::transpose(){
-    std::vector<long long> zeroRows(this->_columns, 0);
-    std::vector<std::vector<long long>>* tTable = new std::vector<std::vector<long long>> (this->_columns, zeroRows);
+    std::vector<std::vector<long long>>* tTable = new std::vector<std::vector<long long>> (this->_columns);
 
     for(int i = 0; i<this->_rows; i++)
         (*tTable)[i].resize(this->_columns);
