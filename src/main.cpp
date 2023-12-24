@@ -9,5 +9,9 @@ int main(){
 
     identity.showMatrix();
 
+    Matrix transposeIdentity(identity.transpose());
+
+    transposeIdentity.showMatrix();
+
     return 0;
 }

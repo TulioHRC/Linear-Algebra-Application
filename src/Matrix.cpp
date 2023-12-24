@@ -1,7 +1,8 @@
 #include "Matrix.hpp"
 
 Matrix::Matrix(int rows, int columns, std::vector<std::vector<long long>> table) : _rows(rows), _columns(columns) {
-    *_table = table;
+    std::vector<std::vector<long long>>* tablePtr= new std::vector<std::vector<long long>>(table);
+    this->_table = tablePtr;
 }
 
 Matrix::Matrix(const Matrix& otherTable) : _rows(otherTable._rows), _columns(otherTable._columns) {
@@ -30,18 +31,21 @@ Matrix::Matrix(int dimension) : _rows(dimension), _columns(dimension) {
 Matrix::~Matrix(){ delete _table; }
 
 Matrix Matrix::transpose(){
-    std::vector<std::vector<long long>> tTable(this->_columns);
+    std::vector<long long> zeroRows(this->_columns, 0);
+    std::vector<std::vector<long long>>* tTable = new std::vector<std::vector<long long>> (this->_columns, zeroRows);
 
-    for(int i = 0; i<this->_columns; i++)
-        tTable[i].resize(this->_rows);
+    for(int i = 0; i<this->_rows; i++)
+        (*tTable)[i].resize(this->_columns);
 
     for(int r = 0; r<this->_rows; r++)
         for(int c = 0; c<this->_columns; c++)
-            tTable[c][r] = (*_table)[r][c];
+            (*tTable)[c][r] = (*_table)[r][c];
     
-    Matrix tMatrix(this->_columns, this->_rows, tTable);
+    Matrix* tMatrix = new Matrix(this->_columns, this->_rows, *tTable);
 
-    return tMatrix;
+    delete tTable;
+
+    return *tMatrix;
 } 
 
 void Matrix::showMatrix(){
@@ -53,6 +57,7 @@ void Matrix::showMatrix(){
         
         std::cout << "]" << std::endl;
     }
+    std::cout << std::endl;
 }
 
 // Operator Overload
