@@ -45,6 +45,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+Notion organization link: https://long-oviraptor-f4a.notion.site/224c2e9349e7407f98e1b88669f8029a?v=965b465b21174bfbaa6bb9f337500182&pvs=4 
+
 It's just the application of the studies of Computational Linear Algebra in UFMG, that'll be made for understanding reasons.
 The objective is to have, things like:
 * Calculator for matrices
