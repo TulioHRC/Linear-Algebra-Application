@@ -15,10 +15,6 @@ int main(){
             std::vector<std::vector<long long>>* table = getTable();
             Matrix* matrix = new Matrix((*table).size(), (*table)[0].size(), *table);
             matrices.push_back(matrix);
-
-            Matrix* mat2 = new Matrix(3);
-            Matrix matR = *mat2 + *matrix;
-            matR.showMatrix();
         }
 
         std::cin >> command;
