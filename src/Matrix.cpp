@@ -69,17 +69,23 @@ Matrix& Matrix::operator=(const Matrix& otherTable){
 }
 
 Matrix Matrix::operator+(const Matrix& otherTable){
+    std::vector<long long> zeroRows(otherTable._columns, 0);
+    std::vector<std::vector<long long>> resTable(this->_rows, zeroRows);
+
     for(int r = 0; r<this->_rows; r++)
         for(int c = 0; c<this->_columns; c++)
-            (*_table)[r][c] += (*otherTable._table)[r][c];
-    return *this;
+            resTable[r][c] = (*_table)[r][c] + (*otherTable._table)[r][c];
+    return Matrix(this->_rows, otherTable._columns, resTable);
 }
 
 Matrix Matrix::operator-(const Matrix& otherTable){
+    std::vector<long long> zeroRows(otherTable._columns, 0);
+    std::vector<std::vector<long long>> resTable(this->_rows, zeroRows);
+
     for(int r = 0; r<this->_rows; r++)
         for(int c = 0; c<this->_columns; c++)
-            (*_table)[r][c] -= (*otherTable._table)[r][c];
-    return *this;
+            resTable[r][c] = (*_table)[r][c] - (*otherTable._table)[r][c];
+    return Matrix(this->_rows, otherTable._columns, resTable);
 }
 
 Matrix Matrix::operator*(const Matrix& otherTable){
@@ -96,36 +102,31 @@ Matrix Matrix::operator*(const Matrix& otherTable){
                 table[r][c] += (*this->_table)[r][i] * (*otherTable._table)[i][c];
         }
 
-    Matrix newMatrix(this->_rows, otherTable._columns, table);
-
-    return newMatrix;
+    return Matrix(this->_rows, otherTable._columns, table);
 }
 
 // Operator Overload for scalar numbers
 
 Matrix Matrix::operator+(long long scalarNum){
     // Error Handling (for not squares matrix)
-
     Matrix identity(this->_rows);
-    *this = *this + identity*scalarNum;
-
-    return *this;
+    return *this + identity*scalarNum;
 }
 
 Matrix Matrix::operator-(long long scalarNum){
     // Error Handling (for not squares matrix)
-
     Matrix identity(this->_rows);
-    *this = *this - identity*scalarNum;
-
-    return *this;
+    return *this - identity*scalarNum;
 }
 
 
 Matrix Matrix::operator*(long long scalarNum){
+    std::vector<long long> zeroRows(this->_columns, 0);
+    std::vector<std::vector<long long>> resTable(this->_rows, zeroRows);
+
     for(int r = 0; r<this->_rows; r++)
         for(int c = 0; c<this->_columns; c++)
-            (*this->_table)[r][c] *= scalarNum;
+            resTable[r][c] = (*this->_table)[r][c] * scalarNum;
     
-    return *this;
+    return Matrix(this->_rows, this->_columns, resTable);
 }
