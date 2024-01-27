@@ -5,6 +5,7 @@
 
 #include "Matrix.hpp"
 
-std::vector<std::vector<long long>>* getTable(); // Return a matrix given in the command line
+std::vector<std::vector<long long>> *getTable(); // Return a matrix given in the command line
+void clearTerminal();
 
 #endif
