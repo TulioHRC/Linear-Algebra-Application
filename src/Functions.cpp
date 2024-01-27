@@ -28,12 +28,3 @@ std::vector<std::vector<long long>> *getTable()
 
     return table;
 }
-
-void clearTerminal()
-{
-    #ifdef _WIN32
-        std::system("cls");
-    #else
-        std::system("clear");
-    #endif
-}

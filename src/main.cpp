@@ -1,5 +1,6 @@
 #include "Matrix.hpp"
 #include "Functions.hpp"
+#include "TerminalFunctions.hpp"
 #include <string.h>
 #include <iostream>
 #include <limits>
@@ -14,7 +15,7 @@ void commandSwitch(std::string command, std::vector<Matrix *> &matrices)
 
         std::cin.get();
     }
-    if (command == "s" || command == "show")
+    if (command == "v" || command == "view")
     {
         std::cout << "\n\tSaved Matrices:" << std::endl;
         for (size_t i = 0; i < matrices.size(); i++)
@@ -22,6 +23,12 @@ void commandSwitch(std::string command, std::vector<Matrix *> &matrices)
             std::cout << "\n(" << i + 1 << ")" << std::endl;
             matrices[i]->showMatrix();
         }
+    }
+    if (command == "o" || command == "operation")
+    {
+        std::cout << "\n\tOperations mode" << std::endl;
+        std::vector<std::string> operationsList = {"plus", "subtraction", "product"};
+        std::string operationSelected = operationsList[selectListItem(operationsList)];
     }
     if (command == "e" || command == "exit")
     {
