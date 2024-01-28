@@ -11,11 +11,11 @@ void clearTerminal()
 #endif
 }
 
-void showMenu(std::vector<std::string> options, int selected)
+void showMenu(std::vector<std::string> options, size_t selected)
 {
     clearTerminal();
 
-    for (int i = 0; i < options.size(); ++i)
+    for (size_t i = 0; i < options.size(); ++i)
     {
         if (i == selected)
             std::cout << "-> " << options[i] << std::endl;
@@ -26,7 +26,7 @@ void showMenu(std::vector<std::string> options, int selected)
 
 int selectListItem(std::vector<std::string> options)
 {
-    int selected = 0;
+    size_t selected = 0;
     char key;
 
     do
@@ -36,11 +36,11 @@ int selectListItem(std::vector<std::string> options)
 
         switch (key)
         {
-            case 72:
-                selected = (selected == 0) ? 0 : selected - 1;
-                break;
-            case 80:
-                selected = (selected == options.size() - 1) ? selected : selected + 1;
+        case 72:
+            selected = (selected == 0) ? 0 : selected - 1;
+            break;
+        case 80:
+            selected = (selected == options.size() - 1) ? selected : selected + 1;
         }
     } while (key != 13); // 13 is Enter
 
