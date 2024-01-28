@@ -26,6 +26,22 @@ void operationsCommand(std::vector<Matrix *> &matrices)
     std::string operationSelected = operationsList[selectListItemTerminal(operationsList)];
 }
 
+void viewOptionsCommand()
+{
+    std::cout << "\n\tLinear Algebra Application\n " << std::endl;
+
+    std::vector<std::string> options = {
+        "c -> Create a matrix",
+        "v -> View saved matrices",
+        "o -> Operations mode of matrices",
+        "e -> exit"};
+
+    for (std::string option : options)
+        std::cout << option << std::endl;
+
+    std::cout << std::endl;
+}
+
 void exitCommand()
 {
     loadProgramTerminal("Finishing Program");

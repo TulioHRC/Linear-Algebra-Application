@@ -1,49 +1,50 @@
 #include "Commands.hpp"
 #include <iostream>
 
-void commandSwitch(std::string command, std::vector<Matrix *> &matrices)
+void commandSwitch(char command, std::vector<Matrix *> &matrices)
 {
-    if (command == "c" || command == "create")
+    switch (command)
     {
+    case 'c':
         createCommand(matrices);
-    }
-    if (command == "v" || command == "view")
-    {
+        break;
+
+    case 'v':
         viewCommand(matrices);
-    }
-    if (command == "o" || command == "operation")
-    {
+        break;
+
+    case 'o':
         operationsCommand(matrices);
-    }
-    if (command == "e" || command == "exit")
-    {
+        break;
+
+    case 'e':
         exitCommand();
+        break;
     }
 }
 
 int main()
 {
     loadProgramTerminal("Starting program");
+    viewOptionsCommand();
 
     std::vector<Matrix *> matrices;
 
-    std::string command;
-    std::cin >> command;
+    char command;
+    std::cin.get(command);
 
-    while (command != "q" && command != "quit")
+    while (true)
     {
         std::cin.ignore();
         commandSwitch(command, matrices);
 
-        std::cout << "\nPress enter to continue..." << std::endl;
+        std::cout << "\nCommand executed. Press enter to continue..." << std::endl;
         std::cin.ignore();
 
         clearTerminal();
-        // viewOptionsCommand();
-        std::cin >> command;
+        viewOptionsCommand();
+        std::cin.get(command);
     }
-
-    std::cout << "\nFinishing the application..." << std::endl;
 
     for (Matrix *matrix : matrices)
         delete matrix;

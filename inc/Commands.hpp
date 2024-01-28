@@ -8,7 +8,7 @@
 void createCommand(std::vector<Matrix *> &);
 void viewCommand(std::vector<Matrix *>);
 void operationsCommand(std::vector<Matrix *> &);
-// void viewOptionsCommand();
+void viewOptionsCommand();
 void exitCommand();
 
 #endif
