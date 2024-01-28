@@ -4,6 +4,7 @@
 #include "Matrix.hpp"
 
 void clearTerminal();
-int selectListItem(std::vector<std::string>); // Returns the index of the selected item
+void loadProgramTerminal(std::string);
+int selectListItemTerminal(std::vector<std::string>); // Returns the index of the selected item
 
 #endif

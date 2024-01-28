@@ -1,6 +1,8 @@
 #include "TerminalFunctions.hpp"
 #include <iostream>
 #include <conio.h>
+#include <chrono>
+#include <thread>
 
 void clearTerminal()
 {
@@ -9,6 +11,26 @@ void clearTerminal()
 #else
     std::system("clear");
 #endif
+}
+
+void loadProgramTerminal(std::string message)
+{
+    clearTerminal();
+    std::cout << message;
+
+    for (int loop = 0; loop < 3; loop++)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            std::cout << "." << std::flush;
+            std::this_thread::sleep_for(std::chrono::milliseconds(200));
+        }
+
+        std::cout << "\b\b\b   \b\b\b" << std::flush; // Clear points
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    }
+
+    clearTerminal();
 }
 
 void showMenu(std::vector<std::string> options, size_t selected)
@@ -24,7 +46,7 @@ void showMenu(std::vector<std::string> options, size_t selected)
     }
 }
 
-int selectListItem(std::vector<std::string> options)
+int selectListItemTerminal(std::vector<std::string> options)
 {
     size_t selected = 0;
     char key;

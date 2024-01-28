@@ -23,11 +23,11 @@ void operationsCommand(std::vector<Matrix *> &matrices)
 {
     std::cout << "\n\tOperations mode" << std::endl;
     std::vector<std::string> operationsList = {"plus", "subtraction", "product"};
-    std::string operationSelected = operationsList[selectListItem(operationsList)];
+    std::string operationSelected = operationsList[selectListItemTerminal(operationsList)];
 }
 
 void exitCommand()
 {
-    std::cout << "Finishing program..." << std::endl;
+    loadProgramTerminal("Finishing Program");
     exit(0);
 }

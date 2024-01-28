@@ -23,7 +23,7 @@ void commandSwitch(std::string command, std::vector<Matrix *> &matrices)
 
 int main()
 {
-    std::cout << "Starting...\n " << std::endl;
+    loadProgramTerminal("Starting program");
 
     std::vector<Matrix *> matrices;
 
@@ -39,6 +39,7 @@ int main()
         std::cin.ignore();
 
         clearTerminal();
+        // viewOptionsCommand();
         std::cin >> command;
     }
 
