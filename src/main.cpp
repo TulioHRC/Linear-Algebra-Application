@@ -1,46 +1,29 @@
-#include "Matrix.hpp"
-#include "Functions.hpp"
-#include "TerminalFunctions.hpp"
-#include <string.h>
+#include "Commands.hpp"
 #include <iostream>
-#include <limits>
 
 void commandSwitch(std::string command, std::vector<Matrix *> &matrices)
 {
     if (command == "c" || command == "create")
     {
-        std::vector<std::vector<long long>> *table = getTable();
-        Matrix *matrix = new Matrix((*table).size(), (*table)[0].size(), *table);
-        matrices.push_back(matrix);
-
-        std::cin.get();
+        createCommand(matrices);
     }
     if (command == "v" || command == "view")
     {
-        std::cout << "\n\tSaved Matrices:" << std::endl;
-        for (size_t i = 0; i < matrices.size(); i++)
-        {
-            std::cout << "\n(" << i + 1 << ")" << std::endl;
-            matrices[i]->showMatrix();
-        }
+        viewCommand(matrices);
     }
     if (command == "o" || command == "operation")
     {
-        std::cout << "\n\tOperations mode" << std::endl;
-        std::vector<std::string> operationsList = {"plus", "subtraction", "product"};
-        std::string operationSelected = operationsList[selectListItem(operationsList)];
+        operationsCommand(matrices);
     }
     if (command == "e" || command == "exit")
     {
-        std::cout << "Finishing program..." << std::endl;
-        exit(0);
+        exitCommand();
     }
 }
 
 int main()
 {
-    std::cout << "Starting...\n"
-              << std::endl;
+    std::cout << "Starting...\n " << std::endl;
 
     std::vector<Matrix *> matrices;
 
