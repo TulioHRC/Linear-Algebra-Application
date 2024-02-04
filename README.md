@@ -113,7 +113,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - Túlio - tulio.prezotti@gmail.com
+Túlio - tulio.prezotti@gmail.com
 
 Project Link: [https://github.com/TulioHRC/Linear-Algebra-Application](https://github.com/TulioHRC/Linear-Algebra-Application)
 
