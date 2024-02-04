@@ -17,10 +17,7 @@ void saveMatricesOnTxtFile(std::vector<Matrix *> matrices)
         for (auto row : table)
         {
             for (long long cell : row)
-            {
-                std::cout << cell << ",";
                 outputMemoryTxtFile << cell << ",";
-            }
             outputMemoryTxtFile << ";";
         }
         outputMemoryTxtFile << std::endl;
@@ -48,7 +45,7 @@ std::vector<Matrix *> readMatricesOnTxtFile()
 
     for (auto matrixText : matricesTxtFormatVector)
     {
-        std::vector<std::vector<long long>> *table = nullptr;
+        std::vector<std::vector<long long>> table;
         std::vector<long long> row;
         std::string numberText;
         numberText = "";
@@ -58,7 +55,7 @@ std::vector<Matrix *> readMatricesOnTxtFile()
             switch (letter)
             {
             case ';':
-                table->push_back(row);
+                table.push_back(row);
                 row.clear();
 
                 break;
@@ -77,10 +74,8 @@ std::vector<Matrix *> readMatricesOnTxtFile()
         }
 
         Matrix *matrixPtr = nullptr;
-        *matrixPtr = Matrix(static_cast<int>(table->size()), static_cast<int>(table[0].size()), *table);
+        matrixPtr = new Matrix(2, 2, table);
         matrices.push_back(matrixPtr);
-
-        delete table;
     }
 
     inputMemoryTxtFile.close();

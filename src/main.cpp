@@ -32,8 +32,7 @@ int main()
     loadProgramTerminal("Starting program");
     viewOptionsCommand();
 
-    std::vector<Matrix *> matrices;
-    std::vector<Matrix *> matricesMemory = getMatricesMemoryCommand();
+    std::vector<Matrix *> matrices = getMatricesMemoryCommand();
 
     char command;
     std::cin.get(command);
@@ -46,7 +45,7 @@ int main()
         std::cout << "\nCommand executed. Press enter to continue..." << std::endl;
         std::cin.ignore();
 
-        // clearTerminal();
+        clearTerminal();
         viewOptionsCommand();
         std::cin.get(command);
     }
