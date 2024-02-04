@@ -13,6 +13,10 @@ void commandSwitch(char command, std::vector<Matrix *> &matrices)
         viewCommand(matrices);
         break;
 
+    case 's':
+        saveCommand(matrices);
+        break;
+
     case 'o':
         operationsCommand(matrices);
         break;
@@ -29,6 +33,7 @@ int main()
     viewOptionsCommand();
 
     std::vector<Matrix *> matrices;
+    std::vector<Matrix *> matricesMemory = getMatricesMemoryCommand();
 
     char command;
     std::cin.get(command);
@@ -41,7 +46,7 @@ int main()
         std::cout << "\nCommand executed. Press enter to continue..." << std::endl;
         std::cin.ignore();
 
-        clearTerminal();
+        // clearTerminal();
         viewOptionsCommand();
         std::cin.get(command);
     }

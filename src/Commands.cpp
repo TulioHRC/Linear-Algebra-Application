@@ -1,4 +1,5 @@
 #include "Commands.hpp"
+#include "MemoryFunctions.hpp"
 
 void createCommand(std::vector<Matrix *> &matrices)
 {
@@ -19,6 +20,20 @@ void viewCommand(std::vector<Matrix *> matrices)
     }
 }
 
+void saveCommand(std::vector<Matrix *> matrices)
+{
+    loadProgramTerminal("Saving matrices");
+
+    saveMatricesOnTxtFile(matrices);
+
+    std::cout << "Matrices saved" << std::endl;
+}
+
+std::vector<Matrix *> getMatricesMemoryCommand()
+{
+    return readMatricesOnTxtFile();
+}
+
 void operationsCommand(std::vector<Matrix *> &matrices)
 {
     std::cout << "\n\tOperations mode" << std::endl;
@@ -33,6 +48,7 @@ void viewOptionsCommand()
     std::vector<std::string> options = {
         "c -> Create a matrix",
         "v -> View saved matrices",
+        "s -> Save matrices in the app memory",
         "o -> Operations mode of matrices",
         "e -> exit"};
 
