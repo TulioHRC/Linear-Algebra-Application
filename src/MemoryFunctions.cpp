@@ -45,6 +45,8 @@ std::vector<Matrix *> readMatricesOnTxtFile()
 
     for (auto matrixText : matricesTxtFormatVector)
     {
+        int rows = 0;
+        int columns = 0;
         std::vector<std::vector<long long>> table;
         std::vector<long long> row;
         std::string numberText;
@@ -56,12 +58,15 @@ std::vector<Matrix *> readMatricesOnTxtFile()
             {
             case ';':
                 table.push_back(row);
+                rows++;
                 row.clear();
 
                 break;
 
             case ',':
                 row.push_back(std::stoll(numberText));
+                if (rows == 0)
+                    columns++;
                 numberText.clear();
 
                 break;
@@ -74,7 +79,7 @@ std::vector<Matrix *> readMatricesOnTxtFile()
         }
 
         Matrix *matrixPtr = nullptr;
-        matrixPtr = new Matrix(2, 2, table);
+        matrixPtr = new Matrix(rows, columns, table);
         matrices.push_back(matrixPtr);
     }
 
