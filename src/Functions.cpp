@@ -14,7 +14,7 @@ std::vector<std::vector<long long>> *getTable()
 
     std::vector<std::vector<long long>> *table = new std::vector<std::vector<long long>>(rows);
 
-    for (int i = 0; i < columns; i++)
+    for (int i = 0; i < rows; i++)
         (*table)[i].resize(columns);
 
     for (int r = 0; r < rows; r++)
