@@ -17,7 +17,7 @@ ${BUILD_DIR}/${TARGET}: ${BUILD_DIR}/main.o ${BUILD_DIR}/Matrix.o ${BUILD_DIR}/F
 ${BUILD_DIR}/Matrix.o: ${SRC_DIR}/Matrix.cpp ${INCLUDE_DIR}/Matrix.hpp
 	${CC} ${CFLAGS} -I ${INCLUDE_DIR} -c ${SRC_DIR}/Matrix.cpp -o ${BUILD_DIR}/Matrix.o
 
-${BUILD_DIR}/Functions.o: ${SRC_DIR}/Functions.cpp ${INCLUDE_DIR}/Functions.hpp
+${BUILD_DIR}/Functions.o: ${SRC_DIR}/Functions.cpp ${INCLUDE_DIR}/Functions.hpp ${INCLUDE_DIR}/TerminalFunctions.hpp
 	${CC} ${CFLAGS} -I ${INCLUDE_DIR} -c ${SRC_DIR}/Functions.cpp -o ${BUILD_DIR}/Functions.o
 
 ${BUILD_DIR}/TerminalFunctions.o: ${SRC_DIR}/TerminalFunctions.cpp ${INCLUDE_DIR}/TerminalFunctions.hpp

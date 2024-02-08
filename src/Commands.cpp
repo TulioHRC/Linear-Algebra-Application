@@ -39,6 +39,20 @@ void operationsCommand(std::vector<Matrix *> &matrices)
     std::cout << "\n\tOperations mode" << std::endl;
     std::vector<std::string> operationsList = {"plus", "subtraction", "product"};
     std::string operationSelected = operationsList[selectListItemTerminal(operationsList)];
+    Matrix itemSelected1 = getMatrixSaved(matrices, false);
+    Matrix itemSelected2 = getMatrixSaved(matrices, (operationSelected == "product") ? true : false, itemSelected1.getRows());
+    Matrix *result;
+
+    if (operationSelected == "plus")
+        result = new Matrix(itemSelected1 + itemSelected2);
+    if (operationSelected == "subtraction")
+        result = new Matrix(itemSelected1 - itemSelected2);
+    if (operationSelected == "product")
+        result = new Matrix(itemSelected1 * itemSelected2);
+
+    std::cout << std::endl;
+    matrices.push_back(result);
+    result->showMatrix();
 }
 
 void viewOptionsCommand()

@@ -18,6 +18,8 @@ public:
 
     Matrix transpose();
     void showMatrix();
+    int getRows();
+    int getColumns();
     std::vector<std::vector<long long>> getTable();
 
     Matrix &operator=(const Matrix &);

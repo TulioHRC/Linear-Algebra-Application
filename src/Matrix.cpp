@@ -64,7 +64,17 @@ void Matrix::showMatrix()
     }
 }
 
-std::vector<std::vector<long long>> Matrix::getTable() 
+int Matrix::getRows()
+{
+    return this->_rows;
+}
+
+int Matrix::getColumns()
+{
+    return this->_columns;
+}
+
+std::vector<std::vector<long long>> Matrix::getTable()
 {
     return *_table;
 }
