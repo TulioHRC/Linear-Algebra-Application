@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <chrono>
 #include <thread>
+#include <sstream>
 
 void clearTerminal()
 {
@@ -46,14 +47,48 @@ void showMenu(std::vector<std::string> options, size_t selected)
     }
 }
 
-int selectListItemTerminal(std::vector<std::string> options)
+void showSingleOption(std::string option)
+{
+    clearTerminal();
+
+    std::cout << option << std::endl;
+}
+
+int selectListMatrixTerminal(std::vector<Matrix *> matrices)
+{
+    std::vector<std::string> stringMatrices;
+    int index = 0;
+    for (Matrix *matrix : matrices)
+    {
+        std::string stringMatrix = "(" + std::to_string(index + 1) + ")\n";
+
+        // Get matrix text
+        std::stringstream ss;
+        std::streambuf *originalCoutStreamBuf = std::cout.rdbuf();
+        std::cout.rdbuf(ss.rdbuf()); // Redirecting cout
+        matrix->showMatrix();
+        std::cout.rdbuf(originalCoutStreamBuf); // Restore cout
+        stringMatrix += ss.str();
+
+        stringMatrices.push_back(stringMatrix);
+        index++;
+    }
+
+    return selectListItemTerminal(stringMatrices, false);
+}
+
+int selectListItemTerminal(std::vector<std::string> options, bool showAllOptions)
 {
     size_t selected = 0;
     char key;
 
     do
     {
-        showMenu(options, selected);
+        if (showAllOptions)
+            showMenu(options, selected);
+        else
+            showSingleOption(options[selected]);
+
         key = _getch();
 
         switch (key)

@@ -38,7 +38,7 @@ void operationsCommand(std::vector<Matrix *> &matrices)
 {
     std::cout << "\n\tOperations mode" << std::endl;
     std::vector<std::string> operationsList = {"plus", "subtraction", "product"};
-    std::string operationSelected = operationsList[selectListItemTerminal(operationsList)];
+    std::string operationSelected = operationsList[selectListItemTerminal(operationsList, true)];
     Matrix itemSelected1 = getMatrixSaved(matrices, false);
     Matrix itemSelected2 = getMatrixSaved(matrices, (operationSelected == "product") ? true : false, itemSelected1.getRows());
     Matrix *result;

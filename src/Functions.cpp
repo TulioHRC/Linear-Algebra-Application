@@ -34,7 +34,7 @@ Matrix getMatrixSaved(std::vector<Matrix *> matrices, bool canBeNumber, int rows
     bool isNumber;
 
     if (canBeNumber)
-        isNumber = (selectListItemTerminal(std::vector<std::string>{"Number", "Matrix"}) == 0) ? true : false;
+        isNumber = (selectListItemTerminal(std::vector<std::string>{"Number", "Matrix"}, true) == 0) ? true : false;
 
     if (isNumber)
     {
@@ -44,6 +44,9 @@ Matrix getMatrixSaved(std::vector<Matrix *> matrices, bool canBeNumber, int rows
         std::cin >> num;
         return *matrix * num;
     }
-
-    return Matrix(2);
+    else
+    {
+        int indexInMatricesSelected = selectListMatrixTerminal(matrices);
+        return *matrices[indexInMatricesSelected];
+    }
 }
