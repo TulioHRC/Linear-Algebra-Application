@@ -29,24 +29,16 @@ std::vector<std::vector<long long>> *getTable()
     return table;
 }
 
-Matrix getMatrixSaved(std::vector<Matrix *> matrices, bool canBeNumber, int rowsPresetWhenSecondMatrix)
+Matrix getMatrixSaved(std::vector<Matrix *> matrices)
 {
-    bool isNumber;
+    int indexInMatricesSelected = selectListMatrixTerminal(matrices);
+    return *matrices[indexInMatricesSelected];
+}
 
-    if (canBeNumber)
-        isNumber = (selectListItemTerminal(std::vector<std::string>{"Number", "Matrix"}, true) == 0) ? true : false;
-
-    if (isNumber)
-    {
-        Matrix *matrix = new Matrix(rowsPresetWhenSecondMatrix);
-        long long num;
-        std::cout << "\nType the number:" << std::endl;
-        std::cin >> num;
-        return *matrix * num;
-    }
-    else
-    {
-        int indexInMatricesSelected = selectListMatrixTerminal(matrices);
-        return *matrices[indexInMatricesSelected];
-    }
+long long getNumber()
+{
+    long long num;
+    std::cout << "\nType the number:" << std::endl;
+    std::cin >> num;
+    return num;
 }

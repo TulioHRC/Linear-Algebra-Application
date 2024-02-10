@@ -7,6 +7,7 @@
 #include "TerminalFunctions.hpp"
 
 std::vector<std::vector<long long>> *getTable(); // Return a matrix given in the command line
-Matrix getMatrixSaved(std::vector<Matrix *>, bool canBeNumber, int rowsPresetWhenSecondMatrix = 0);
+Matrix getMatrixSaved(std::vector<Matrix *>);
+long long getNumber();
 
 #endif

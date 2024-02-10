@@ -91,6 +91,11 @@ Matrix &Matrix::operator=(const Matrix &otherTable)
 
 Matrix Matrix::operator+(const Matrix &otherTable)
 {
+    // Exception Handler
+    if (this->_rows != otherTable._rows || this->_columns != otherTable._columns)
+    {
+        throw std::runtime_error("Dimensions of the matrices, must be the same");
+    }
     std::vector<long long> zeroRows(otherTable._columns, 0);
     std::vector<std::vector<long long>> resTable(this->_rows, zeroRows);
 
@@ -102,6 +107,12 @@ Matrix Matrix::operator+(const Matrix &otherTable)
 
 Matrix Matrix::operator-(const Matrix &otherTable)
 {
+    // Exception Handler
+    if (this->_rows != otherTable._rows || this->_columns != otherTable._columns)
+    {
+        throw std::runtime_error("Dimensions of the matrices, must be the same");
+    }
+
     std::vector<long long> zeroRows(otherTable._columns, 0);
     std::vector<std::vector<long long>> resTable(this->_rows, zeroRows);
 
@@ -113,7 +124,11 @@ Matrix Matrix::operator-(const Matrix &otherTable)
 
 Matrix Matrix::operator*(const Matrix &otherTable)
 {
-    // Error handling (not respecting the n x m . m x p)
+    // Exception Handler
+    if (this->_columns != otherTable._rows)
+    {
+        throw std::runtime_error("Number of columns of the first matrix must be the same of the rows in the second matrix.");
+    }
 
     std::vector<std::vector<long long>> table(this->_rows);
     for (int i = 0; i < this->_rows; i++)
