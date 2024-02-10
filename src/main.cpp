@@ -1,28 +1,56 @@
-#include "Matrix.hpp"
-#include "Functions.hpp"
-#include <string.h>
+#include "Commands.hpp"
+#include <iostream>
 
-int main(){
-    std::cout << "Starting...\n" << std::endl;
+void commandSwitch(char command, std::vector<Matrix *> &matrices)
+{
+    switch (command)
+    {
+    case 'c':
+        createCommand(matrices);
+        break;
 
-    std::vector<Matrix*> matrices;
+    case 'v':
+        viewCommand(matrices);
+        break;
 
-    std::string command;
-    std::cin >> command;
- 
-    while(command != "q" && command != "quit") {
-        if(command == "c" or command == "create"){ // Create matrix
-            std::vector<std::vector<long long>>* table = getTable();
-            Matrix* matrix = new Matrix((*table).size(), (*table)[0].size(), *table);
-            matrices.push_back(matrix);
-        }
+    case 's':
+        saveCommand(matrices);
+        break;
 
-        std::cin >> command;
+    case 'o':
+        operationsCommand(matrices);
+        break;
+
+    case 'e':
+        exitCommand();
+        break;
+    }
+}
+
+int main()
+{
+    loadProgramTerminal("Starting program");
+    viewOptionsCommand();
+
+    std::vector<Matrix *> matrices = getMatricesMemoryCommand();
+
+    char command;
+    std::cin.get(command);
+
+    while (true)
+    {
+        std::cin.ignore();
+        commandSwitch(command, matrices);
+
+        std::cout << "\nCommand executed. Press enter to continue..." << std::endl;
+        std::cin.ignore();
+
+        clearTerminal();
+        viewOptionsCommand();
+        std::cin.get(command);
     }
 
-    std::cout << "\nFinishing the application..." << std::endl;
-
-    for(Matrix* matrix : matrices)
+    for (Matrix *matrix : matrices)
         delete matrix;
 
     return 0;
