@@ -3,7 +3,7 @@
 
 void createCommand(std::vector<Matrix *> &matrices)
 {
-    std::vector<std::vector<long long>> *table = getTable();
+    std::vector<std::vector<long double>> *table = getTable();
     Matrix *matrix = new Matrix((*table).size(), (*table)[0].size(), *table);
     matrices.push_back(matrix);
 
@@ -55,7 +55,7 @@ void operationsCommand(std::vector<Matrix *> &matrices)
         isNumber = (selectListItemTerminal(std::vector<std::string>{"Number", "Matrix"}, true) == 0) ? true : false;
     if (isNumber)
     {
-        long long number = getNumber();
+        long double number = getNumber();
         itemSelected1 = itemSelected1 * number;
         result = new Matrix(itemSelected1);
     }
