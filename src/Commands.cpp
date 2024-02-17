@@ -43,7 +43,10 @@ void decompositionCommandLU(std::vector<Matrix *> &matrices)
     std::cin.ignore();
 
     std::pair<Matrix*, Matrix*> resultMatrices = getLUfromDecomposition(matrixA);
+    clearTerminal();
+    std::cout << "\tL matrix:" << std::endl;
     resultMatrices.first->showMatrix();
+    std::cout << "\n\tU matrix:" << std::endl;
     resultMatrices.second->showMatrix();
 }
 

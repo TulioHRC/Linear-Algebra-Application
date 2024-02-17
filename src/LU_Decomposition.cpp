@@ -17,6 +17,11 @@ std::pair<Matrix *, Matrix *> getLUfromDecomposition(Matrix A) // A = LU
             long double multiplier = uTable[downRow][row] / uTable[row][row];
             (*lTable)[downRow][row] = multiplier;
             uTable[downRow][row] = 0;
+            if (row < A.getRows()-1)
+                for (int col = row+1; col < A.getColumns(); col++)
+                {
+                    uTable[downRow][col] -= uTable[row][col]*multiplier;
+                }
         }
     }
 
