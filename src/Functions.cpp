@@ -1,7 +1,7 @@
 #include <cstdlib>
 #include "Functions.hpp"
 
-std::vector<std::vector<long long>> *getTable()
+std::vector<std::vector<long double>> *getTable()
 {
     std::cout << "Creating your own matrix..." << std::endl;
 
@@ -12,7 +12,7 @@ std::vector<std::vector<long long>> *getTable()
     std::cout << "Type the number of columns: ";
     std::cin >> columns;
 
-    std::vector<std::vector<long long>> *table = new std::vector<std::vector<long long>>(rows);
+    std::vector<std::vector<long double>> *table = new std::vector<std::vector<long double>>(rows);
 
     for (int i = 0; i < rows; i++)
         (*table)[i].resize(columns);
@@ -35,9 +35,9 @@ Matrix getMatrixSaved(std::vector<Matrix *> matrices)
     return *matrices[indexInMatricesSelected];
 }
 
-long long getNumber()
+long double getNumber()
 {
-    long long num;
+    long double num;
     std::cout << "\nType the number:" << std::endl;
     std::cin >> num;
     return num;

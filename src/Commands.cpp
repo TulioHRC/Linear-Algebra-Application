@@ -1,9 +1,10 @@
 #include "Commands.hpp"
+#include "LU_Decomposition.hpp"
 #include "MemoryFunctions.hpp"
 
 void createCommand(std::vector<Matrix *> &matrices)
 {
-    std::vector<std::vector<long long>> *table = getTable();
+    std::vector<std::vector<long double>> *table = getTable();
     Matrix *matrix = new Matrix((*table).size(), (*table)[0].size(), *table);
     matrices.push_back(matrix);
 
@@ -34,6 +35,29 @@ std::vector<Matrix *> getMatricesMemoryCommand()
     return readMatricesOnTxtFile();
 }
 
+void decompositionCommandLU(std::vector<Matrix *> &matrices)
+{
+    Matrix matrixA = getMatrixSaved(matrices);
+    std::cout << "\nFirst matrix selected." << std::endl;
+    std::cout << "\nPress enter to get the decomposition results...";
+    std::cin.ignore();
+
+    std::pair<Matrix*, Matrix*> resultMatrices = getLUfromDecomposition(matrixA);
+    clearTerminal();
+    std::cout << "\tL matrix:" << std::endl;
+    resultMatrices.first->showMatrix();
+    std::cout << "\n\tU matrix:" << std::endl;
+    resultMatrices.second->showMatrix();
+}
+
+void decompositionCommand(std::vector<Matrix *> &matrices)
+{
+    std::cout << "\n\tDecomposition mode" << std::endl;
+    std::vector<std::string> decompositionsList = {"LU Decomposition"};
+    std::string decompositionSelected = decompositionsList[selectListItemTerminal(decompositionsList, true)];
+    if (decompositionSelected == "LU Decomposition") decompositionCommandLU(matrices);
+}
+
 void operationsCommand(std::vector<Matrix *> &matrices)
 {
     std::cout << "\n\tOperations mode" << std::endl;
@@ -55,7 +79,7 @@ void operationsCommand(std::vector<Matrix *> &matrices)
         isNumber = (selectListItemTerminal(std::vector<std::string>{"Number", "Matrix"}, true) == 0) ? true : false;
     if (isNumber)
     {
-        long long number = getNumber();
+        long double number = getNumber();
         itemSelected1 = itemSelected1 * number;
         result = new Matrix(itemSelected1);
     }
@@ -98,6 +122,7 @@ void viewOptionsCommand()
         "c -> Create a matrix",
         "v -> View saved matrices",
         "s -> Save matrices in the app memory",
+        "d -> Decompose a matrix",
         "o -> Operations mode of matrices",
         "e -> exit"};
 

@@ -21,6 +21,10 @@ void commandSwitch(char command, std::vector<Matrix *> &matrices)
         operationsCommand(matrices);
         break;
 
+    case 'd':
+        decompositionCommand(matrices);
+        break;
+
     case 'e':
         exitCommand();
         break;

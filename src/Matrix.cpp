@@ -1,14 +1,14 @@
 #include "Matrix.hpp"
 
-Matrix::Matrix(int rows, int columns, std::vector<std::vector<long long>> table) : _rows(rows), _columns(columns)
+Matrix::Matrix(int rows, int columns, std::vector<std::vector<long double>> table) : _rows(rows), _columns(columns)
 {
-    std::vector<std::vector<long long>> *tablePtr = new std::vector<std::vector<long long>>(table);
+    std::vector<std::vector<long double>> *tablePtr = new std::vector<std::vector<long double>>(table);
     this->_table = tablePtr;
 }
 
 Matrix::Matrix(const Matrix &otherTable) : _rows(otherTable._rows), _columns(otherTable._columns)
 {
-    std::vector<std::vector<long long>> *tableCopy = new std::vector<std::vector<long long>>(otherTable._rows);
+    std::vector<std::vector<long double>> *tableCopy = new std::vector<std::vector<long double>>(otherTable._rows);
 
     for (int i = 0; i < otherTable._rows; i++)
         (*tableCopy)[i].resize(otherTable._columns);
@@ -22,8 +22,8 @@ Matrix::Matrix(const Matrix &otherTable) : _rows(otherTable._rows), _columns(oth
 
 Matrix::Matrix(int dimension) : _rows(dimension), _columns(dimension)
 {
-    std::vector<long long> zeroRows(dimension, 0);
-    std::vector<std::vector<long long>> *table = new std::vector<std::vector<long long>>(dimension, zeroRows);
+    std::vector<long double> zeroRows(dimension, 0);
+    std::vector<std::vector<long double>> *table = new std::vector<std::vector<long double>>(dimension, zeroRows);
 
     for (int i = 0; i < dimension; i++)
         (*table)[i][i] = 1;
@@ -35,7 +35,7 @@ Matrix::~Matrix() { delete _table; }
 
 Matrix Matrix::transpose()
 {
-    std::vector<std::vector<long long>> *tTable = new std::vector<std::vector<long long>>(this->_columns);
+    std::vector<std::vector<long double>> *tTable = new std::vector<std::vector<long double>>(this->_columns);
 
     for (int i = 0; i < this->_rows; i++)
         (*tTable)[i].resize(this->_columns);
@@ -74,7 +74,7 @@ int Matrix::getColumns()
     return this->_columns;
 }
 
-std::vector<std::vector<long long>> Matrix::getTable()
+std::vector<std::vector<long double>> Matrix::getTable()
 {
     return *_table;
 }
@@ -96,8 +96,8 @@ Matrix Matrix::operator+(const Matrix &otherTable)
     {
         throw std::runtime_error("Dimensions of the matrices, must be the same");
     }
-    std::vector<long long> zeroRows(otherTable._columns, 0);
-    std::vector<std::vector<long long>> resTable(this->_rows, zeroRows);
+    std::vector<long double> zeroRows(otherTable._columns, 0);
+    std::vector<std::vector<long double>> resTable(this->_rows, zeroRows);
 
     for (int r = 0; r < this->_rows; r++)
         for (int c = 0; c < this->_columns; c++)
@@ -113,8 +113,8 @@ Matrix Matrix::operator-(const Matrix &otherTable)
         throw std::runtime_error("Dimensions of the matrices, must be the same");
     }
 
-    std::vector<long long> zeroRows(otherTable._columns, 0);
-    std::vector<std::vector<long long>> resTable(this->_rows, zeroRows);
+    std::vector<long double> zeroRows(otherTable._columns, 0);
+    std::vector<std::vector<long double>> resTable(this->_rows, zeroRows);
 
     for (int r = 0; r < this->_rows; r++)
         for (int c = 0; c < this->_columns; c++)
@@ -130,7 +130,7 @@ Matrix Matrix::operator*(const Matrix &otherTable)
         throw std::runtime_error("Number of columns of the first matrix must be the same of the rows in the second matrix.");
     }
 
-    std::vector<std::vector<long long>> table(this->_rows);
+    std::vector<std::vector<long double>> table(this->_rows);
     for (int i = 0; i < this->_rows; i++)
         table[i].resize(otherTable._columns);
 
@@ -147,24 +147,24 @@ Matrix Matrix::operator*(const Matrix &otherTable)
 
 // Operator Overload for scalar numbers
 
-Matrix Matrix::operator+(long long scalarNum)
+Matrix Matrix::operator+(long double scalarNum)
 {
     // Error Handling (for not squares matrix)
     Matrix identity(this->_rows);
     return *this + identity * scalarNum;
 }
 
-Matrix Matrix::operator-(long long scalarNum)
+Matrix Matrix::operator-(long double scalarNum)
 {
     // Error Handling (for not squares matrix)
     Matrix identity(this->_rows);
     return *this - identity * scalarNum;
 }
 
-Matrix Matrix::operator*(long long scalarNum)
+Matrix Matrix::operator*(long double scalarNum)
 {
-    std::vector<long long> zeroRows(this->_columns, 0);
-    std::vector<std::vector<long long>> resTable(this->_rows, zeroRows);
+    std::vector<long double> zeroRows(this->_columns, 0);
+    std::vector<std::vector<long double>> resTable(this->_rows, zeroRows);
 
     for (int r = 0; r < this->_rows; r++)
         for (int c = 0; c < this->_columns; c++)
