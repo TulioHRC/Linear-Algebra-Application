@@ -1,4 +1,4 @@
-#include "LU_Decomposition.hpp"
+#include "Decompositions.hpp"
 
 std::pair<Matrix *, Matrix *> getLUfromDecomposition(Matrix A) // A = LU
 {

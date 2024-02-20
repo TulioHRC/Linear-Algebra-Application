@@ -1,5 +1,5 @@
-#ifndef LUDECOMPOSITION_H
-#define LUDECOMPOSITION_H
+#ifndef DECOMPOSITIONS_H
+#define DECOMPOSITIONS_H
 
 #include "Matrix.hpp"
 

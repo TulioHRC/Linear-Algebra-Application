@@ -1,5 +1,5 @@
 #include "Commands.hpp"
-#include "LU_Decomposition.hpp"
+#include "Decompositions.hpp"
 #include "MemoryFunctions.hpp"
 
 void createCommand(std::vector<Matrix *> &matrices)
