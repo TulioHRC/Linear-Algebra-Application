@@ -5,6 +5,7 @@
 #include <vector>
 #include <fstream>
 #include <stdexcept>
+#include <cmath>
 
 class Matrix
 {
@@ -22,6 +23,7 @@ public:
     void showMatrix();
     int getRows();
     int getColumns();
+    long double getEuclideanNorm();
     std::vector<std::vector<long double>> getTable();
 
     Matrix &operator=(const Matrix &);

@@ -89,6 +89,22 @@ int Matrix::getColumns()
     return this->_columns;
 }
 
+long double Matrix::getEuclideanNorm()
+{
+    if (this->_rows == 1)
+    {
+        return sqrt((*this * this->transpose()).getTable()[0][0]);
+    }
+    else if (this->_columns == 1)
+    {
+        return sqrt((this->transpose() * *this).getTable()[0][0]);
+    }
+    else
+    {
+        return 0; // Much more complex
+    }
+}
+
 std::vector<std::vector<long double>> Matrix::getTable()
 {
     return *_table;
