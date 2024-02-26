@@ -155,7 +155,7 @@ Matrix Matrix::operator*(const Matrix &otherTable)
         for (int c = 0; c < otherTable._columns; c++)
         {
             table[r][c] = 0;
-            for (int i = 0; i < this->_rows; i++)
+            for (int i = 0; i < this->_columns; i++)
                 table[r][c] += (*this->_table)[r][i] * (*otherTable._table)[i][c];
         }
 
