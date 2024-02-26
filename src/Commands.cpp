@@ -1,5 +1,5 @@
 #include "Commands.hpp"
-#include "LU_Decomposition.hpp"
+#include "Decompositions.hpp"
 #include "MemoryFunctions.hpp"
 
 void createCommand(std::vector<Matrix *> &matrices)
@@ -38,24 +38,50 @@ std::vector<Matrix *> getMatricesMemoryCommand()
 void decompositionCommandLU(std::vector<Matrix *> &matrices)
 {
     Matrix matrixA = getMatrixSaved(matrices);
-    std::cout << "\nFirst matrix selected." << std::endl;
+    std::cout << "\nA matrix selected." << std::endl;
     std::cout << "\nPress enter to get the decomposition results...";
     std::cin.ignore();
 
-    std::pair<Matrix*, Matrix*> resultMatrices = getLUfromDecomposition(matrixA);
+    std::pair<Matrix *, Matrix *> resultMatrices = getLUfromDecomposition(matrixA);
     clearTerminal();
+    std::cout << "\n\tA = LU\n"
+              << std::endl;
+
     std::cout << "\tL matrix:" << std::endl;
     resultMatrices.first->showMatrix();
     std::cout << "\n\tU matrix:" << std::endl;
     resultMatrices.second->showMatrix();
 }
 
+void decompositionCommandPAequalsLU(std::vector<Matrix *> &matrices)
+{
+    Matrix matrixA = getMatrixSaved(matrices);
+    std::cout << "\nA matrix selected." << std::endl;
+    std::cout << "\nPress enter to get the decomposition results...";
+    std::cin.ignore();
+
+    ThreeMatrices resultMatrices = getPAequalsLUfromDecomposition(matrixA);
+    clearTerminal();
+    std::cout << "\n\tPA = LU\n"
+              << std::endl;
+
+    std::cout << "\tP matrix:" << std::endl;
+    resultMatrices.first->showMatrix();
+    std::cout << "\n\tL matrix:" << std::endl;
+    resultMatrices.second->showMatrix();
+    std::cout << "\n\tU matrix:" << std::endl;
+    resultMatrices.third->showMatrix();
+}
+
 void decompositionCommand(std::vector<Matrix *> &matrices)
 {
     std::cout << "\n\tDecomposition mode" << std::endl;
-    std::vector<std::string> decompositionsList = {"LU Decomposition"};
+    std::vector<std::string> decompositionsList = {"LU Decomposition", "PA = LU Decomposition"};
     std::string decompositionSelected = decompositionsList[selectListItemTerminal(decompositionsList, true)];
-    if (decompositionSelected == "LU Decomposition") decompositionCommandLU(matrices);
+    if (decompositionSelected == "LU Decomposition")
+        decompositionCommandLU(matrices);
+    if (decompositionSelected == "PA = LU Decomposition")
+        decompositionCommandPAequalsLU(matrices);
 }
 
 void operationsCommand(std::vector<Matrix *> &matrices)

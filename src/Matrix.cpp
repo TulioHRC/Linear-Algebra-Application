@@ -51,6 +51,23 @@ Matrix Matrix::transpose()
     return *tMatrix;
 }
 
+void Matrix::moveRowsFromTo(int fromRow, int toRow)
+{
+    std::vector<std::vector<long double>> newTable = std::vector<std::vector<long double>>(this->_columns);
+
+    for (int row = 0; row < this->_rows; row++)
+    {
+        if (row == fromRow)
+            newTable[row] = (*this->_table)[toRow];
+        else if (row == toRow)
+            newTable[row] = (*this->_table)[fromRow];
+        else
+            newTable[row] = (*this->_table)[row];
+    }
+
+    *_table = newTable;
+}
+
 void Matrix::showMatrix()
 {
     for (int r = 0; r < this->_rows; r++)

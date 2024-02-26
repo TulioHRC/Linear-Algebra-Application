@@ -18,6 +18,7 @@ public:
     ~Matrix();
 
     Matrix transpose();
+    void moveRowsFromTo(int fromRow, int toRow);
     void showMatrix();
     int getRows();
     int getColumns();
