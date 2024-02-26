@@ -35,18 +35,16 @@ Matrix::~Matrix() { delete _table; }
 
 Matrix Matrix::transpose()
 {
-    std::vector<std::vector<long double>> *tTable = new std::vector<std::vector<long double>>(this->_columns);
+    std::vector<std::vector<long double>> tTable(this->_columns);
 
-    for (int i = 0; i < this->_rows; i++)
-        (*tTable)[i].resize(this->_columns);
+    for (int i = 0; i < this->_columns; i++)
+        tTable[i].resize(this->_rows);
 
     for (int r = 0; r < this->_rows; r++)
         for (int c = 0; c < this->_columns; c++)
-            (*tTable)[c][r] = (*_table)[r][c];
+            tTable[c][r] = (*this->_table)[r][c];
 
-    Matrix *tMatrix = new Matrix(this->_columns, this->_rows, *tTable);
-
-    delete tTable;
+    Matrix *tMatrix = new Matrix(this->_columns, this->_rows, tTable);
 
     return *tMatrix;
 }
