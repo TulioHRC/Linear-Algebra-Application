@@ -44,8 +44,7 @@ void decompositionCommandLU(std::vector<Matrix *> &matrices)
 
     std::pair<Matrix *, Matrix *> resultMatrices = getLUfromDecomposition(matrixA);
     clearTerminal();
-    std::cout << "\n\tA = LU\n"
-              << std::endl;
+    std::cout << "\n\tA = LU\n" << std::endl;
 
     std::cout << "\tL matrix:" << std::endl;
     resultMatrices.first->showMatrix();
@@ -62,8 +61,7 @@ void decompositionCommandPAequalsLU(std::vector<Matrix *> &matrices)
 
     ThreeMatrices resultMatrices = getPAequalsLUfromDecomposition(matrixA);
     clearTerminal();
-    std::cout << "\n\tPA = LU\n"
-              << std::endl;
+    std::cout << "\n\tPA = LU\n" << std::endl;
 
     std::cout << "\tP matrix:" << std::endl;
     resultMatrices.first->showMatrix();
@@ -73,15 +71,25 @@ void decompositionCommandPAequalsLU(std::vector<Matrix *> &matrices)
     resultMatrices.third->showMatrix();
 }
 
+void decompositionCommandClassicQR(std::vector<Matrix *> &matrices)
+{
+    Matrix matrixA = getMatrixSaved(matrices);
+    std::cout << "\nA matrix selected." << std::endl;
+    std::cout << "\nPress enter to get the decomposition results...";
+    std::cin.ignore();
+}
+
 void decompositionCommand(std::vector<Matrix *> &matrices)
 {
     std::cout << "\n\tDecomposition mode" << std::endl;
-    std::vector<std::string> decompositionsList = {"LU Decomposition", "PA = LU Decomposition"};
+    std::vector<std::string> decompositionsList = {"LU Decomposition", "PA = LU Decomposition", "Classic QR Decomposition"};
     std::string decompositionSelected = decompositionsList[selectListItemTerminal(decompositionsList, true)];
     if (decompositionSelected == "LU Decomposition")
         decompositionCommandLU(matrices);
     if (decompositionSelected == "PA = LU Decomposition")
         decompositionCommandPAequalsLU(matrices);
+    if (decompositionSelected == "Classic QR Decomposition")
+        decompositionCommandClassicQR(matrices);
 }
 
 void operationsCommand(std::vector<Matrix *> &matrices)
