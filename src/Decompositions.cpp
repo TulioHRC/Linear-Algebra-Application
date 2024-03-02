@@ -141,7 +141,7 @@ std::pair<Matrix *, Matrix *> getQRclassicFromDecomposition(Matrix A) // ONly wo
     Matrix q0 = columnsOfA[0] * (1 / r_0_0); // q0 = A0 / ||A0||
 
     columnsOfQ.push_back(q0);
-    cellsOfR[0].push_back(r_0_0);
+    cellsOfR[0][0] = r_0_0;
 
     // Iterations
     std::vector<long double> zeroRows = {0};
@@ -177,8 +177,10 @@ std::pair<Matrix *, Matrix *> getQRclassicFromDecomposition(Matrix A) // ONly wo
 
     int rank = std::min(A.getColumns(), A.getRows());
     Matrix qMatrixTransposed(rank, rank, qTable);
-    
+
     Matrix *Q = new Matrix(qMatrixTransposed.transpose());
 
-    return std::pair<Matrix *, Matrix *>(Q, nullptr);
+    Matrix *R = new Matrix(rank, rank, cellsOfR);
+
+    return std::pair<Matrix *, Matrix *>(Q, R);
 }
