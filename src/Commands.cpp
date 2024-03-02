@@ -44,7 +44,8 @@ void decompositionCommandLU(std::vector<Matrix *> &matrices)
 
     std::pair<Matrix *, Matrix *> resultMatrices = getLUfromDecomposition(matrixA);
     clearTerminal();
-    std::cout << "\n\tA = LU\n" << std::endl;
+    std::cout << "\n\tA = LU\n"
+              << std::endl;
 
     std::cout << "\tL matrix:" << std::endl;
     resultMatrices.first->showMatrix();
@@ -61,7 +62,8 @@ void decompositionCommandPAequalsLU(std::vector<Matrix *> &matrices)
 
     ThreeMatrices resultMatrices = getPAequalsLUfromDecomposition(matrixA);
     clearTerminal();
-    std::cout << "\n\tPA = LU\n" << std::endl;
+    std::cout << "\n\tPA = LU\n"
+              << std::endl;
 
     std::cout << "\tP matrix:" << std::endl;
     resultMatrices.first->showMatrix();
@@ -77,6 +79,16 @@ void decompositionCommandClassicQR(std::vector<Matrix *> &matrices)
     std::cout << "\nA matrix selected." << std::endl;
     std::cout << "\nPress enter to get the decomposition results...";
     std::cin.ignore();
+
+    std::pair<Matrix *, Matrix *> resultMatrices = getQRclassicFromDecomposition(matrixA);
+    // clearTerminal();
+    std::cout << "\n\tA = QR\n"
+              << std::endl;
+
+    std::cout << "\tQ matrix:" << std::endl;
+    resultMatrices.first->showMatrix();
+    std::cout << "\n\tR matrix:" << std::endl;
+    resultMatrices.second->showMatrix();
 }
 
 void decompositionCommand(std::vector<Matrix *> &matrices)
