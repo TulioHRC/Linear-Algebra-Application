@@ -12,5 +12,6 @@ struct ThreeMatrices {
 
 std::pair<Matrix*, Matrix*> getLUfromDecomposition(Matrix);
 ThreeMatrices getPAequalsLUfromDecomposition(Matrix);
+std::pair<Matrix*, Matrix*> getQRclassicFromDecomposition(Matrix);
 
 #endif

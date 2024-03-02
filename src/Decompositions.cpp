@@ -113,3 +113,74 @@ ThreeMatrices getPAequalsLUfromDecomposition(Matrix A)
 
     return result;
 }
+
+std::pair<Matrix *, Matrix *> getQRclassicFromDecomposition(Matrix A) // ONly works for complete rank A
+{
+    // Error Handling (...)
+
+    std::vector<Matrix> columnsOfA;
+    for (int column = 0; column < A.getColumns(); column++)
+    {
+        std::vector<std::vector<long double>> columnTable(0);
+        std::vector<long double> columnRows;
+        for (int row = 0; row < A.getRows(); row++)
+            columnRows.push_back(A.getTable()[row][column]);
+
+        columnTable.push_back(columnRows);
+        Matrix columnMatrix(1, A.getRows(), columnTable);
+        columnsOfA.push_back(columnMatrix.transpose());
+    }
+
+    std::vector<Matrix> columnsOfQ;
+    std::vector<long double> zeroRowsWithRankOfAColumns(std::min(A.getColumns(), A.getRows()), 0);
+    std::vector<std::vector<long double>> cellsOfR(A.getColumns(), zeroRowsWithRankOfAColumns);
+
+    // First Operation
+    long double r_0_0 = columnsOfA[0].getEuclideanNorm();
+
+    Matrix q0 = columnsOfA[0] * (1 / r_0_0); // q0 = A0 / ||A0||
+
+    columnsOfQ.push_back(q0);
+    cellsOfR[0][0] = r_0_0;
+
+    // Iterations
+    std::vector<long double> zeroRows = {0};
+    std::vector<std::vector<long double>> *projectionBaseTables = new std::vector<std::vector<long double>>(A.getRows(), zeroRows);
+    Matrix projection(A.getRows(), 1, *projectionBaseTables);
+
+    delete projectionBaseTables;
+
+    for (int row = 1; row < A.getRows(); row++)
+    {
+        for (int upperRows = row - 1; upperRows >= 0; upperRows--)
+        {
+            long double rValue = (columnsOfQ[upperRows].transpose() * columnsOfA[row]).getTable()[0][0];
+            cellsOfR[upperRows][row] = rValue;
+            projection = projection + columnsOfQ[upperRows] * rValue;
+        }
+
+        Matrix *vError = new Matrix(columnsOfA[row] - projection);
+        long double rValueOfThisRow = (*vError).getEuclideanNorm();
+        Matrix *qMatrixOfThisRow = new Matrix((*vError) * (1 / rValueOfThisRow));
+
+        columnsOfQ.push_back(*qMatrixOfThisRow);
+        cellsOfR[row][row] = rValueOfThisRow;
+
+        projection = projection - projection; // Clears it values
+        delete vError;
+        delete qMatrixOfThisRow;
+    }
+
+    std::vector<std::vector<long double>> qTable;
+    for (Matrix column : columnsOfQ)
+        qTable.push_back(column.transpose().getTable()[0]);
+
+    int rank = std::min(A.getColumns(), A.getRows());
+    Matrix qMatrixTransposed(rank, rank, qTable);
+
+    Matrix *Q = new Matrix(qMatrixTransposed.transpose());
+
+    Matrix *R = new Matrix(rank, rank, cellsOfR);
+
+    return std::pair<Matrix *, Matrix *>(Q, R);
+}
